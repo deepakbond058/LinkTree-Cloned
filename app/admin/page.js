@@ -142,7 +142,7 @@ export const Page = () => {
     const inputElement = e.currentTarget;
     const dataElement = e.currentTarget.previousSibling;
     linkArrUpdater(index, key, value);
-    //this doesn't work as each object is unique even when holding same keys and valuw
+   //this doesnt work as each object is unique even when holding same keys and valuw
     // setLinkArr([...linkArr, { ...linkArr[index], [key]: value }]);
 
     inputElement.classList.toggle("hidden");

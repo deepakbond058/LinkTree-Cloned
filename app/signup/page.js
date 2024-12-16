@@ -225,7 +225,7 @@ export default function Page() {
                   <p className="text-[#676b5f] text-center text-sm">
                     By clicking{" "}
                     <span className="font-bold">Create account</span>, you agree
-                    to Linktree's{" "}
+                    to Linktree&apos;s{" "}
                     <span className="underline">privacy notice</span>,{" "}
                     <span className="underline">T&Cs</span> and to receive
                     offers, news and updates.

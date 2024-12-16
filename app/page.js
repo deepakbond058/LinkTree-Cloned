@@ -128,7 +128,7 @@ export default function Home() {
               Analyze your audience and keep your followers engaged
             </h2>
             <p className="text-[rgb(30,35,48)] text-xl 2xl:text-3xl font-bold">
-              Track your engagement over time, monitor revenue and learn what's
+              Track your engagement over time, monitor revenue and learn what&apos;s
               converting your audience. Make informed updates on the fly to keep
               them coming back.
             </p>

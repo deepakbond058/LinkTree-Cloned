@@ -44,7 +44,7 @@ export default function Page() {
       });
       if (!res.ok) {
         setError("incorrectCredentials", {
-          message:"Looks like this password's incorrect. Try again, or reset your password if you're having trouble!",
+          message:"Looks like this passwords is incorrect. Try again, or reset your password if you're having trouble!",
         });
       }
     }
@@ -258,7 +258,7 @@ export default function Page() {
                 </Link>
               </div>
               <p className="text-gray-700">
-                Don't have an account?{" "}
+                Don&apos;t have an account?
                 <Link
                   href="/signup"
                   className="text-blue-800 underline cursor-pointer"
