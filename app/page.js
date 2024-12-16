@@ -128,7 +128,7 @@ export default function Home() {
               Analyze your audience and keep your followers engaged
             </h2>
             <p className="text-[rgb(30,35,48)] text-xl 2xl:text-3xl font-bold">
-              Track your engagement over time, monitor revenue and learn what’s
+              Track your engagement over time, monitor revenue and learn what's
               converting your audience. Make informed updates on the fly to keep
               them coming back.
             </p>
@@ -160,7 +160,7 @@ export default function Home() {
           <Textslider />
         </div>
         <div>
-          <imgslider />
+          <Imageslider />
         </div>
         <div className="grid lg:grid-cols-2 gap-5 px-10">
           <div className="bg-[rgb(210,232,35)] rounded-3xl overflow-hidden p-10 flex-col justify-between flex gap-5">
