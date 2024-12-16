@@ -87,7 +87,7 @@ export default function Page() {
     }
   };
   return (
-    <Suspense>
+    
     <div className="flex font-[family-name:var(--font-intervariable)]">
       <div className="w-full">
         <div className="p-5 md:p-11 ">
@@ -433,6 +433,6 @@ export default function Page() {
       </div>
       <div className="lg:block min-h-[100vh] w-full hidden bg-[url('/signup.png')] bg-no-repeat bg-cover bg-center"></div>
     </div>
-    </Suspense>
+   
   );
 }

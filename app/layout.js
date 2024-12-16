@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SessionWrapper from '@/components/sessionWrapper'
 import localFont from "next/font/local";
-
+import { Suspense } from 'react'
 
 const intervariable = localFont({
   src: "./fonts/Inter-VariableFont_opsz,wght.ttf",
@@ -22,8 +22,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${intervariable.variable} antialiased min-h-screen`}>
         <SessionWrapper>
+          <Suspense>
           <Navbar />
           {children}
+          </Suspense>
         </SessionWrapper>
       </body>
     </html>
