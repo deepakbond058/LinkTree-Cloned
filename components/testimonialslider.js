@@ -2,11 +2,12 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
 
+
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 
-export default () => {
+export default function TestimonialsSlider() {
   const swipeRef = useRef(null);
   const docArr = useRef([
     {
@@ -87,6 +88,7 @@ export default () => {
             <img
               src={`/testimonials/${index + 1}.avif`}
               alt="pic"
+            
             />
             <h2 className=" text-4xl lg:text-5xl text-[#1e2330] font-extrabold">
               {item.testimonial}

@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/effect-fade";
 
-const featureslider = () => {
+const Featureslider = () => {
   const featureArr = [
     { name: "TC", src: "1.avif" },
     { name: "INSIDER", src: "2.avif" },
@@ -34,4 +34,4 @@ const featureslider = () => {
   );
 };
 
-export default featureslider;
+export default Featureslider;

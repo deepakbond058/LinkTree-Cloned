@@ -7,7 +7,7 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/autoplay";
 
-export default () => {
+export default function ImagesSlider() {
   const [docArr, setDocArr] = useState(null);
   const fetchdata = async () => {
     const doc = await fetchdatafromDB();
@@ -65,6 +65,7 @@ export default () => {
                   {/* Front side */}
                   <div className="absolute w-full h-full backface-hidden">
                     <img
+                      
                       src={item.profilepic}
                       alt={`Slide ${index + 1}`}
                       className="w-full h-full object-cover rounded-3xl"

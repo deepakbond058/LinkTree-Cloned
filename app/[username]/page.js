@@ -2,6 +2,7 @@ import clientPromise from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import Linkcards from "@/components/Linkcards";
 
+
 export default async function Page({ params }) {
   const username = (await params).username;
 

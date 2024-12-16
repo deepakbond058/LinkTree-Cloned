@@ -5,7 +5,8 @@ import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function SignIn() {
+
+export default function Page() {
   const [passwordType, setPasswordType] = useState("password");
   const { data: session } = useSession();
   const router = useRouter();
@@ -198,7 +199,7 @@ export default function SignIn() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className=" "
-                  role="img"
+                  role="Image"
                   aria-hidden="true"
                   aria-labelledby=" "
                 >

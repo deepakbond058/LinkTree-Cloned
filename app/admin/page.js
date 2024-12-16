@@ -1,19 +1,18 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "next/link"
+
 import { useSession, signOut } from "next-auth/react";
 import {
-  fetchdatafromDB,
   gettingUserLinks,
   updatingUserData,
   updatingUserLinks,
 } from "@/actions/userActions";
 
-export const page = () => {
+export const Page = () => {
   const { data: session } = useSession();
   const [updatingArchive, setUpdatingArchive] = useState(false);
-  const params = useSearchParams();
   const router = useRouter();
   const iframeRef = useRef(null);
   const [dropdownShow, setDropdownShow] = useState(false);
@@ -1612,4 +1611,4 @@ export const page = () => {
   );
 };
 
-export default page;
+export default Page;

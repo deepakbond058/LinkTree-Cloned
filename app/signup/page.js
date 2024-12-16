@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { checkUsernameAvailailty } from "@/actions/userActions";
 
-export default function SignIn() {
+
+export default function Page() {
   const searchParams = useSearchParams();
   const usernameParam = searchParams.get("username");
   const [passwordType, setPasswordType] = useState("password");
@@ -157,7 +158,7 @@ export default function SignIn() {
                       <img
                         src={errors.email ? "/passwrong.svg" : "/passright.svg"}
                         className="absolute right-4 top-1/2 w-5 -translate-y-1/2"
-                        alt="emailvalidatorimg"
+                        alt="emailvalidatorImage"
                       />
                     </div>
                     {errors.email && (
@@ -243,7 +244,7 @@ export default function SignIn() {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       className=" "
-                      role="img"
+                      role="Image"
                       aria-hidden="true"
                       aria-labelledby=" "
                     >
@@ -314,7 +315,7 @@ export default function SignIn() {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       className=" rotate-90 "
-                      role="img"
+                      role="Image"
                       aria-hidden="true"
                       aria-labelledby=" "
                     >
@@ -380,7 +381,7 @@ export default function SignIn() {
                         errors.username ? "/passwrong.svg" : "/passright.svg"
                       }
                       className="absolute right-4 top-1/2 w-5 -translate-y-1/2"
-                      alt="usernamevalidatorimg"
+                      alt="usernamevalidatorImage"
                     />
                   </div>
                   {errors.username && (

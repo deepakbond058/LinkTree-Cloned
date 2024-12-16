@@ -7,6 +7,7 @@ import Testimonialslider from "@/components/testimonialslider";
 import Featureslider from "@/components/featureslider";
 import Footer from "@/components/Footer";
 
+
 export default function Home() {
   const router = useRouter();
   const [usernameText, setUsernameText] = useState("");
@@ -159,7 +160,7 @@ export default function Home() {
           <Textslider />
         </div>
         <div>
-          <Imageslider />
+          <imgslider />
         </div>
         <div className="grid lg:grid-cols-2 gap-5 px-10">
           <div className="bg-[rgb(210,232,35)] rounded-3xl overflow-hidden p-10 flex-col justify-between flex gap-5">
