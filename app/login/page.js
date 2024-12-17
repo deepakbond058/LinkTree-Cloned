@@ -11,6 +11,7 @@ export default function Page() {
   const { data: session } = useSession();
   const router = useRouter();
   const [continuebtn, setContinuebtn] = useState(true);
+  const [loader, setLoader] = useState(false)
 
   const {
     register,
@@ -37,11 +38,13 @@ export default function Page() {
       if (!data.email.includes("@")) {
         data = { ...data, email: "", username: data.email };
       }
+      setLoader(true)
       const res = await signIn("credentials", {
         redirect: false,
         ...data,
         type: "login",
       });
+      setLoader(false);
       if (!res.ok) {
         setError("incorrectCredentials", {
           message:"Looks like this passwords is incorrect. Try again, or reset your password if you're having trouble!",
@@ -173,12 +176,12 @@ export default function Page() {
               <div>              
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-[rgb(129,41,217)] hover:bg-[rgb(93,24,162)] py-3 font-bold text-white disabled:bg-[#e0e2d9] disabled:text-[#a8aaa2]"
+                    className="w-full rounded-full h-14 flex justify-center items-center bg-[rgb(129,41,217)] hover:bg-[rgb(93,24,162)] py-3 font-bold text-white disabled:bg-[#e0e2d9] disabled:text-[#a8aaa2]"
                   >
-                   {continuebtn?"Continue":"Log in"}
+                   {loader? <img className="h-full" src="/loader.gif" />:continuebtn?"Continue":"Log in"}
                   </button>                              
                 {errors.incorrectCredentials && (
-                  <p className="mt-2 ml-2 text-sm text-red-600 ">
+                  <p className="mt-2 ml-2 text-sm text-red-600">
                     {errors.incorrectCredentials.message}
                   </p>
                 )}
@@ -188,8 +191,10 @@ export default function Page() {
             <div className="flex flex-col gap-3">
               <button
                 className="w-full rounded-full flex gap-3 justify-center items-center border-2 hover:bg-gray-100 border-gray-100 py-3 "
-                onClick={() => {
-                  signIn("google");
+                onClick={async() => {
+                  setLoader(true)
+                  await signIn("google");
+                  setLoader(false)
                 }}
               >
                 <svg
@@ -225,8 +230,10 @@ export default function Page() {
 
               <button
                 className="w-full rounded-full flex gap-3 justify-center items-center border-2 hover:bg-gray-100 border-gray-100 py-3 "
-                onClick={() => {
-                  signIn("github");
+                onClick={async() => {
+                  setLoader(true)
+                  await signIn("github");
+                  setLoader(false)
                 }}
               >
                 <svg

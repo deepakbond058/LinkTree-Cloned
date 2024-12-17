@@ -2,7 +2,6 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
 
-
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
@@ -85,17 +84,13 @@ export default function TestimonialsSlider() {
       {docArr.current.map((item, index) => (
         <SwiperSlide key={index}>
           <div className="text-center flex items-center flex-col gap-5">
-            <img
-              src={`/testimonials/${index + 1}.avif`}
-              alt="pic"
-            
-            />
+            <img src={`/testimonials/${index + 1}.avif`} alt="pic" />
             <h2 className=" text-4xl lg:text-5xl text-[#1e2330] font-extrabold">
               {item.testimonial}
             </h2>
             <div className="flex-col flex">
-            <h2 className="text-xl text-slate-700">{item.name}</h2>
-            <h2 className="text-xl text-slate-700">{item.title}</h2>
+              <h2 className="text-xl text-slate-700">{item.name}</h2>
+              <h2 className="text-xl text-slate-700">{item.title}</h2>
             </div>
           </div>
         </SwiperSlide>
@@ -147,7 +142,7 @@ export default function TestimonialsSlider() {
               strokeLinecap="round"
               strokeLinejoin="round"
             ></g>
-            <g id="SVGRepo_iconCarrier"> 
+            <g id="SVGRepo_iconCarrier">
               <path
                 d="M6 12H18M18 12L13 7M18 12L13 17"
                 stroke="#1E2330"
@@ -161,4 +156,4 @@ export default function TestimonialsSlider() {
       </div>
     </Swiper>
   );
-};
+}
