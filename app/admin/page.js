@@ -17,18 +17,18 @@ export const Page = () => {
   const [updatingArchive, setUpdatingArchive] = useState(false);
   const [dropdownShow, setDropdownShow] = useState(false);
   const [previewBtn, setPreviewBtn] = useState(false);
-  
+
   const [biodataModal, setBiodataModal] = useState(false);
   const [showModalContent, setShowModalContent] = useState(false);
-  
+
   const [linkArr, setLinkArr] = useState(null);
   const [userBiodata, setUserBiodata] = useState(null);
-  
+
   const [iframeLoader, setIframeLoader] = useState(false);
   const [intitialDataLoader, setIntitialDataLoader] = useState(false);
   const [signOutLoader, setSignOutLoader] = useState(false);
   const [sessionLoader, setSessionLoader] = useState(true); //on page landing
-
+  const [upcomingUpdate, setUpcomingUpdate] = useState(false);
 
   const linkArrUpdaterInDB = async () => {
     setIframeLoader(true);
@@ -74,6 +74,9 @@ export const Page = () => {
     document
       .getElementById(`${type}Modal-${index}`)
       .classList.toggle("max-h-[200px]");
+    document
+      .getElementById(`${type}Modal-${index}`)
+      .scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const fetchInitialData = async () => {
@@ -142,6 +145,25 @@ export const Page = () => {
     dataElement.classList.toggle("hidden");
   };
 
+  const toggleActiveLink = (e) => {
+    //removing active link class
+    const navBtns = document.getElementsByClassName("navLink");
+    for (const x of navBtns) {
+      if (x.className.includes("activeLink")) {
+        x.classList.toggle("activeLink");
+      }
+    }
+    //chnaging dom on corresponding navlink
+    document.getElementById("mainElementparent").scrollIntoView({behavior:"smooth",block:"start"})
+     if(e.currentTarget.className.includes("available")){
+      setUpcomingUpdate(false);
+    }else{
+      setUpcomingUpdate(true);
+     }
+    //adding active link class
+    e.currentTarget.classList.toggle("activeLink");
+  };
+
   useEffect(() => {
     if (status === "authenticated") {
       setUserBiodata({
@@ -153,27 +175,25 @@ export const Page = () => {
             ? ""
             : session?.user.image,
         bio: session?.user.bio,
-      })
+      });
     }
-    console.log(session)
   }, [session]);
-    //session is updated multiple times even afer authentiated but status not after getting authentiated
-  
+  //session is updated multiple times even afer authentiated but status not after getting authentiated
+
   useEffect(() => {
-    if(status==='authenticated' && linkArr){
-    linkArrUpdaterInDB();
+    if (status === "authenticated" && linkArr) {
+      linkArrUpdaterInDB();
     }
   }, [linkArr]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
-    } else if(status==='authenticated'){
+    } else if (status === "authenticated") {
       setSessionLoader(false);
       fetchInitialData();
     }
-    console.log(status)
-  },[status])
+  }, [status]);
 
   return (
     <div>
@@ -182,11 +202,25 @@ export const Page = () => {
           <img src="/loader.gif" className="w-20 invert" />
         </div>
       ) : (
-        <div className="font-[family-name:var(--font-intervariable)] bg-[#f3f3f1]">
+        <div
+          id="mainElementparent"
+          className="font-[family-name:var(--font-intervariable)] bg-[#f3f3f1]"
+        >
+          {/* future version update info */}
+          {upcomingUpdate && (
+            <div
+              className={` pt-10 flex flex-col gap-10 items-center bg-[#fcecf3] px-4 py-2 transition-all min-h-[150vh] md:mr-[30vw] md:ml-[20vw] 2xl:ml-[12vw]  border border-gray-300 ${
+                previewBtn ? "hidden md:flex" : "flex"
+              }`}
+            >
+              <span className="font-bold text-center">Changes Coming in Future Updates</span>
+              <img src="/upcoming.gif" alt="upcoming updates"  className="w-1/2"/>
+            </div>
+          )}
           {/* main center content*/}
-          {!updatingArchive && (
+          {!updatingArchive && !upcomingUpdate && (
             <main
-              className={` flex-col gap-5 px-4 py-2 transition-all min-h-[150vh] md:mr-[30vw] md:ml-[20vw] 2xl:ml-[12vw] bg-[#f3f3f1] border border-gray-300 pb-[20vh] ${
+              className={` flex-col gap-5 px-4 py-2 transition-all min-h-[150vh] md:mr-[30vw] md:ml-[20vw] 2xl:ml-[12vw]  border border-gray-300 pb-[20vh] ${
                 previewBtn ? "hidden md:flex" : "flex"
               }`}
             >
@@ -493,6 +527,9 @@ export const Page = () => {
                 <div
                   onClick={() => {
                     setUpdatingArchive(true);
+                    document
+                      .getElementById("mainElementparent")
+                      .scrollIntoView({ behavior: "smooth", block: "start" });
                   }}
                   className="cursor-pointer flex group gap-2 rounded-full items-center"
                 >
@@ -786,7 +823,6 @@ export const Page = () => {
                               <button
                                 className="flex gap-2 items-center justify-center rounded-full text-black text-base px-4 py-3 w-full font-bold border-2 border-[#f6f7f5] hover:bg-[#f6f7f5]"
                                 onClick={() => {
-
                                   linkArrUpdater(index, "deleteEntry");
 
                                   document.getElementById(
@@ -802,8 +838,6 @@ export const Page = () => {
                                       `deletePermissionModal-${index}`
                                     )
                                     .classList.toggle("max-h-[300px]");
-                               
-
                                 }}
                               >
                                 <svg
@@ -1033,9 +1067,9 @@ export const Page = () => {
             </div>
           )}
           {/* archive main content */}
-          {updatingArchive && (
+          {updatingArchive && !upcomingUpdate && (
             <main
-              className={`flex flex-col gap-3 px-4 py-2 transition-all min-h-[150vh] md:mr-[30vw] md:ml-[20vw] 2xl:ml-[12vw] bg-[#f3f3f1] border border-gray-300  ${
+              className={`flex flex-col gap-3 px-4 py-2 transition-all min-h-[150vh] md:mr-[30vw] md:ml-[20vw] 2xl:ml-[12vw] border border-gray-300  ${
                 previewBtn ? "hidden md:flex" : "flex"
               }`}
             >
@@ -1049,7 +1083,7 @@ export const Page = () => {
                     target="_blank"
                     href={`${process.env.NEXT_PUBLIC_HOST}/${session?.user.username}`}
                     className="underline"
-                  >{`${process.env.NEXT_PUBLIC_HOST.split("https://")[1]}/${
+                  >{`${process.env.NEXT_PUBLIC_HOST.split("://")[1]}/${
                     session?.user.username
                   }`}</Link>
                 </div>
@@ -1073,6 +1107,9 @@ export const Page = () => {
                 <div
                   className="flex relative gap-2 items-center cursor-pointer group w-fit"
                   onClick={() => {
+                    document
+                      .getElementById("mainElementparent")
+                      .scrollIntoView({ behavior: "smooth", block: "start" });
                     setUpdatingArchive(false);
                   }}
                 >
@@ -1353,9 +1390,10 @@ export const Page = () => {
                   ></path>
                 </svg>
               </Link>
-              <Link
-                href="/admin"
-                className="flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
+              <button
+                
+                onClick={toggleActiveLink}
+                className="navLink activeLink available flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1372,10 +1410,10 @@ export const Page = () => {
                   </g>
                 </svg>
                 <span className="hidden md:block">Links</span>
-              </Link>
-              <Link
-                href="/admin"
-                className="flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
+              </button>
+              <button
+                onClick={toggleActiveLink}
+                className="navLink flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1390,10 +1428,10 @@ export const Page = () => {
                   ></path>
                 </svg>
                 <span className="hidden md:block">Shop</span>
-              </Link>
-              <Link
-                href="/admin"
-                className="flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
+              </button>
+              <button
+                onClick={toggleActiveLink}
+                className="navLink flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1408,10 +1446,10 @@ export const Page = () => {
                   ></path>
                 </svg>
                 <span className="hidden md:block">Appearance</span>
-              </Link>
-              <Link
-                href="/admin"
-                className="md:gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9] hidden md:flex"
+              </button>
+              <button
+                onClick={toggleActiveLink}
+                className="navLink md:gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9] hidden md:flex"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1462,10 +1500,10 @@ export const Page = () => {
                   </defs>
                 </svg>
                 <span className="hidden md:block">Social Planner</span>
-              </Link>
-              <Link
-                href="/admin"
-                className="flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
+              </button>
+              <button
+                onClick={toggleActiveLink}
+                className="navLink flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1481,10 +1519,10 @@ export const Page = () => {
                   ></path>
                 </svg>
                 <span className="hidden md:block">Analytics</span>
-              </Link>
-              <Link
-                href="/admin"
-                className="flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
+              </button>
+              <button
+                onClick={toggleActiveLink}
+                className="navLink flex gap-2 hover:bg-gray-200 rounded-lg p-2 hover:text-[#8129d9]"
               >
                 <svg
                   className=" text-[rgb(115,115,115)] h-[18px] w-5"
@@ -1499,7 +1537,7 @@ export const Page = () => {
                   </g>
                 </svg>
                 <span className="hidden md:block">Settings</span>
-              </Link>
+              </button>
             </div>
             <div className="relative">
               <button
@@ -1508,7 +1546,7 @@ export const Page = () => {
                 onBlur={() => {
                   setTimeout(() => {
                     setDropdownShow(false);
-                  }, 200);
+                  }, 400);
                 }}
                 onClick={() => {
                   setDropdownShow(!dropdownShow);
