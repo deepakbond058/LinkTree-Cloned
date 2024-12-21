@@ -23,7 +23,6 @@ const Donation = ({ username ,name }) => {
     //need to make nextJS env variables public NEXT_PUBLIC_KEY_ID to access them duing 'use client' or they will be undefined
     //use UPi:test@razorpay for free testing although no redirects are avaialable after payment
     const options = {
-      key: process.env.NEXT_PUBLIC_KEY_ID,
       amount: coffees * 50,
       currency: "INR",
       name: "LinkTree Clone", //your business name

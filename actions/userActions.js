@@ -8,8 +8,8 @@ import Razorpay from "razorpay";
 
 export const initiate = async (to_username, paymentform) => {
   var instance = new Razorpay({
-    key_id: process.env.NEXT_PUBLIC_KEY_ID,
-    key_secret: process.env.NEXT_PUBLIC_KEY_SECRET,
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET,
   });
   const x = await instance.orders.create({
     amount: Number.parseInt(paymentform.amount),
