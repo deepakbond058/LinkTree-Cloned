@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Textslider from "@/components/Textslider";
-import Imageslider from "@/components/Imageslider";
-import Testimonialslider from "@/components/testimonialslider";
-import Featureslider from "@/components/featureslider";
-import Footer from "@/components/Footer";
+import Textslider from "@/Components/Home/Textslider";
+import Imageslider from "@/Components/Home/Imageslider";
+import Testimonialslider from "@/Components/Home/testimonialslider";
+import Featureslider from "@/Components/Home/featureslider";
+import Footer from "@/Components/Home/Footer";
 
 
 export default function Home() {

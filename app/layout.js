@@ -1,7 +1,7 @@
 
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import SessionWrapper from '@/components/sessionWrapper'
+import Navbar from "@/Components/Root/Navbar";
+import SessionWrapper from '@/Components/Root/sessionWrapper'
 import localFont from "next/font/local";
 import { Suspense } from 'react'
 

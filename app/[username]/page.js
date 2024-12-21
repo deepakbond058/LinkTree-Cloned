@@ -1,39 +1,44 @@
 import clientPromise from "@/lib/mongodb";
 import { notFound } from "next/navigation";
-import Linkcards from "@/components/Linkcards";
-
+import Linkcards from "@/Components/UserProfile/Linkcards";
+import Donation from "@/Components/UserProfile/Donation";
 
 export default async function Page({ params }) {
   const username = (await params).username;
-
+  
   const client = await clientPromise;
   const db = client.db("LinkTree");
   const collection = db.collection("userData");
   const doc = await collection.findOne({ username });
-
+  
   if (!doc) {
     return notFound();
   }
+ 
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-intervariable)] bg-gradient-to-br from-pink-900 via-red-700 to-orange-700 text-gray-100 font-medium">
+    <div className="min-h-[120vh] font-[family-name:var(--font-intervariable)] bg-gradient-to-br from-pink-900 via-red-700 to-orange-700 text-gray-100 font-medium">
       <div className="min-h-screen py-10 px-4 flex flex-col gap-4 items-center w-full text-sm md:text-base max-w-lg mx-auto">
-        
+        {/* user image */}
         <img
           className="w-1/4 aspect-square md:w-[10vw] object-cover object-top rounded-full"
           src={doc.profilepic}
           alt="profile"
-          />
-         
+        />
+
+        {/* user name and bio bio */}
         <div className="text-center">
           <div className="font-bold text-base md:text-xl">
             {doc.fullname ? doc.fullname : "@" + doc.username}
           </div>
-          <div >{doc.bio}</div>
+          <div>{doc.bio}</div>
         </div>
 
+        {/* donation modal */}
+        <Donation username={username} name={doc.fullname}/>
+        {/* user links */}
         <Linkcards email={doc.email} linkArr={doc.linkArr} />
-
+        {/* footer logo */}
         <svg
           viewBox="0 0 80 17"
           fill="none"
