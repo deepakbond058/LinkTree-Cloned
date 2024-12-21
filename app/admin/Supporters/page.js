@@ -103,7 +103,7 @@ const Page = () => {
             </svg>
           </div>
           <p className="font-semibold text-black">
-            You don't have any supporters yet
+            You don&apos;t have any supporters yet
           </p>
           <p>Share your page with your audience to get started.</p>
         </div>
