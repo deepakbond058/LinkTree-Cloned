@@ -22,7 +22,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} LinkTree. All rights reserved.
           </p>
           <div className="flex gap-5 items-center">
-            <p className="text-xl">Made With <span className="text-2xl">❤️</span> By <Link href="https://github.com/deepakbond058" className="hover:underline cursor-pointer">Deepak Singh</Link></p>
+            <p className="text-lg">Made With <span className="text-xl">❤️</span> By <Link href="https://github.com/deepakbond058" className="hover:underline cursor-pointer">Deepak Singh</Link></p>
             <Link href="https://github.com/deepakbond058" target="_blank">     
             <svg
               
